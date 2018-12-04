@@ -23,23 +23,15 @@
                 android:gravity="center"
                 android:textSize="18sp"
                 android:textColor="@color/text_topbar"
-                android:text="卡"/>
+                android:text="IF26_Card"/>
 
-            <View
+        <View
                 android:layout_width="match_parent"
                 android:layout_height="2px"
                 android:background="@color/div_white"
                 android:layout_alignParentBottom="true"/>
 
-            <Button
-                android:id="@+id/test"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="68dp"
-                android:layout_marginEnd="72dp"
-                android:text="Button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
 
 
 
@@ -107,12 +99,22 @@
 
 
     <FrameLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/top_bar"
-        android:layout_above="@id/div_tab_bar"
-        android:id="@+id/content">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="41dp">
 
+        <Button
+            android:id="@+id/test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="72dp"
+            android:layout_marginTop="68dp"
+            android:text="Button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </FrameLayout>
 
 </RelativeLayout>

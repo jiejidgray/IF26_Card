@@ -1,5 +1,6 @@
 package fr.utt.if26.if26_card;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -28,9 +29,9 @@ public class CustomCaptureActivity extends AppCompatActivity {
 
     private CaptureManager mCaptureManager;
 
-
     private DecoratedBarcodeView mBarcodeView;
     private Toolbar mToolbar;
+    private Button manualButton;
 
 
     @Override
@@ -44,6 +45,15 @@ public class CustomCaptureActivity extends AppCompatActivity {
         mCaptureManager = new CaptureManager(CustomCaptureActivity.this, mBarcodeView);
         mCaptureManager.initializeFromIntent(getIntent(), savedInstanceState);
         mCaptureManager.decode();
+
+        manualButton = (Button)findViewById(fr.utt.if26.if26_card.R.id.add_manually);
+        manualButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(CustomCaptureActivity.this, ManualActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     /**
      * initialiser window
@@ -57,7 +67,7 @@ public class CustomCaptureActivity extends AppCompatActivity {
     }
 
     /**
-     * 初始化标题栏
+     * init le toolbar
      */
     private void initToolbar() {
         mToolbar = (Toolbar) findViewById(fr.utt.if26.if26_card.R.id.toolbar);
