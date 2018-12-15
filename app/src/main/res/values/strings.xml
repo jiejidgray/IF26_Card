@@ -2,6 +2,7 @@
     <string name="app_name">IF26_Card</string>
     <string name="card">Card</string>
     <string name="reduction">Reduction</string>
+    <string name="comment">Comment</string>
     <string name="setting">Setting</string>
 
 </resources>

@@ -19,9 +19,19 @@ public class Card {
 
     }
 
+    public Bitmap getTypeImage() {
+        return this.Typephoto;
+    }
 
+    public Bitmap getCodeImage() {
+        return this.Codephoto;
+    }
 
+    public String getNumber () {
+        return this.Number;
+    }
 
-
-
+    public String getComment () {
+        return this.Comment;
+    }
 }

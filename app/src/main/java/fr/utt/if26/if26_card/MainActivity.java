@@ -19,7 +19,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private android.app.FragmentManager fManager;
-    private MyFragment fg_card,fg_reduction,fg_setting;
+    private FragmentCard fg_card;
+    private FragmentReduction fg_reduction;
+    private FragmentSetting fg_setting;
 
     private TextView txt_topbar;
     private TextView txt_card;
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setSelected();
                 txt_card.setSelected(true);
                 if(fg_card == null){
-                    fg_card = new MyFragment("第一个Fragment");
+                    fg_card = new FragmentCard();
                     fTransaction.add(R.id.content,fg_card);
                     ajouter.setVisibility(View.VISIBLE);
                     txt_topbar.setText(R.string.card);
@@ -108,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setSelected();
                 txt_reduction.setSelected(true);
                 if(fg_reduction == null){
-                    fg_reduction = new MyFragment("第二个Fragment");
+                    fg_reduction = new FragmentReduction();
                     fTransaction.add(R.id.content,fg_reduction);
                     ajouter.setVisibility(View.GONE);
                     txt_topbar.setText(R.string.reduction);
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setSelected();
                 txt_setting.setSelected(true);
                 if(fg_setting == null){
-                    fg_setting = new MyFragment("第三个Fragment");
+                    fg_setting = new FragmentSetting();
                     fTransaction.add(R.id.content,fg_setting);
                     ajouter.setVisibility(View.GONE);
                     txt_topbar.setText(R.string.setting);
@@ -140,7 +142,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         fTransaction.commit();
     }
-
-
 
 }
