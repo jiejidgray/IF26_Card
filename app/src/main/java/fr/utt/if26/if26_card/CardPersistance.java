@@ -95,6 +95,7 @@ public class CardPersistance extends SQLiteOpenHelper implements PersistanceInte
     @Override
     public void initdata() {
 
+
     }
 
 //还没做

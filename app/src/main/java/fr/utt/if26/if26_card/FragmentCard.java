@@ -22,7 +22,7 @@ public class FragmentCard extends Fragment {
     private Activity mActivity;
 
 
-    //不确定需不需要的功能，之后可能删掉
+   /* //不确定需不需要的功能，之后可能删掉
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = (Activity) context;
@@ -37,15 +37,15 @@ public class FragmentCard extends Fragment {
         frag.setArguments(bundle);   //设置参数
         return frag;
         }
-
+*/
         @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fg_content,container,false);
+        View view = inflater.inflate(R.layout.activity_card_liste,container,false);
         //View view1 = inflater.inflate(R.layout.activity_card_liste,container,false);
         gridview = (GridView) view.findViewById(R.id.liste_card_lv);
         CardPersistance persistance = new CardPersistance(this.getActivity(), "cards.db", null, 1);
         ArrayList<Card> listcard = persistance.getallCard();
-        SetCardAdaptateur adapteur = new SetCardAdaptateur(this.getActivity(), R.layout.activity_card, listcard);
+        SetCardAdaptateur adapteur = new SetCardAdaptateur(this.getActivity(), R.layout.card_icon, listcard);
         gridview.setAdapter(adapteur);
         return view;
     }
