@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button test= findViewById(R.id.test);
-        test.setOnClickListener(new View.OnClickListener() {
+        Button ajoutebutton= findViewById(R.id.button_ajouter);
+        ajoutebutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, AddCardActivity.class);

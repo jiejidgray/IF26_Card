@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".CardActivity">
 
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="172dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:padding="4dp"
+        android:scaleType="fitXY" />
 </android.support.constraint.ConstraintLayout>

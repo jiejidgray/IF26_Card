@@ -120,15 +120,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="41dp">
 
-        <Button
-            android:id="@+id/test"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="72dp"
-            android:layout_marginTop="68dp"
-            android:text="Button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
     </FrameLayout>
 
 </RelativeLayout>
