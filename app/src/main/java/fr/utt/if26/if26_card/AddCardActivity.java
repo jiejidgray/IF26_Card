@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+
 import com.google.zxing.integration.android.IntentIntegrator;
+
+import java.util.ArrayList;
 
 public class AddCardActivity extends AppCompatActivity {
 
@@ -29,5 +33,13 @@ public class AddCardActivity extends AppCompatActivity {
                 integrator.initiateScan();
             }
         });
+
+        ListView maListe = findViewById(R.id.card_list_lv);
+
+        CardPersistance persistance = new CardPersistance(this, "cards.db", null, 1);
+        persistance.initdata();
+        ArrayList<Card> cards = persistance.getallCard();
+        CardScrollAdaptateur adapteur = new CardScrollAdaptateur(this, R.layout.item_card, cards);
+        maListe.setAdapter(adapteur);
     }
 }

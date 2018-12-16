@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class SetCardAdaptateur extends ArrayAdapter<Card>  {
         Card card = cards.get(position);
         ImageView iv_card = v.findViewById(R.id.image);
         iv_card.setImageBitmap(card.getTypeImage());
+
 
 
         return v;
