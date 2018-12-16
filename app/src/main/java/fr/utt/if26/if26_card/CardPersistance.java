@@ -29,6 +29,7 @@ public class CardPersistance extends SQLiteOpenHelper implements PersistanceInte
     private static final String ATTRIBUT_CODEPHOTO = "codephoto";
     private static final String ATTRIBUT_TYPEPHOTO = "typephoto";
     private static final String ATTRIBUT_COMMENT = "comment";
+    private static final String ATTRIBUT_TYPENAME = "typename";
 
 //图片以Blob形式存入数据库，提取出来时转换成bitmap格式
 
@@ -36,7 +37,7 @@ public class CardPersistance extends SQLiteOpenHelper implements PersistanceInte
 
 //顺序：卡号，条形码图，卡片种类图，注释
         final String table_card_create =
-                "CREATE TABLE " + TABLE_CARD + "(" + ATTRIBUT_NUMBER + " TEXT primary key," + ATTRIBUT_CODEPHOTO + " BLOB, " + ATTRIBUT_TYPEPHOTO + " BLOB, " + ATTRIBUT_COMMENT + " TEXT" +
+                "CREATE TABLE " + TABLE_CARD + "(" + ATTRIBUT_NUMBER + " TEXT primary key," + ATTRIBUT_CODEPHOTO + " BLOB, " + ATTRIBUT_TYPEPHOTO + " BLOB, " + ATTRIBUT_COMMENT + " TEXT," + ATTRIBUT_TYPENAME + " TEXT" +
                         ")";
         db.execSQL(table_card_create);
 
@@ -99,6 +100,7 @@ public class CardPersistance extends SQLiteOpenHelper implements PersistanceInte
         values.put(ATTRIBUT_CODEPHOTO,imgToArray(card.getCodeImage()));
         values.put(ATTRIBUT_TYPEPHOTO,imgToArray(card.getTypeImage()));
         values.put(ATTRIBUT_COMMENT,card.getComment());
+        values.put(ATTRIBUT_TYPENAME,card.getTypeName());
 
         db.insert(TABLE_CARD, null, values);
         db.close();
@@ -173,8 +175,9 @@ public class CardPersistance extends SQLiteOpenHelper implements PersistanceInte
         Bitmap newtypephoto = BitmapFactory.decodeByteArray(cursor.getBlob(2),
                 0, cursor.getBlob(2).length);
         String newcomment = cursor.getString(3);
+        String newtypename = cursor.getString(4);
 
-        Card card = new Card(newnumber, newcodephoto, newtypephoto, newcomment);
+        Card card = new Card(newnumber, newcodephoto, newtypephoto, newcomment, newtypename);
         return card;
 
 
@@ -204,10 +207,9 @@ public class CardPersistance extends SQLiteOpenHelper implements PersistanceInte
                 Card card = new Card(cursor.getString(0),BitmapFactory.decodeByteArray(cursor.getBlob(1),
                         0, cursor.getBlob(1).length),
                         BitmapFactory.decodeByteArray(cursor.getBlob(2),
-                                0, cursor.getBlob(2).length),cursor.getString(3));
+                                0, cursor.getBlob(2).length),cursor.getString(3),cursor.getString(4));
                 listcard.add(card);
             } while (cursor.moveToNext());
-
         }
         return listcard;
     }

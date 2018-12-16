@@ -2,10 +2,12 @@ package fr.utt.if26.if26_card;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -28,8 +30,11 @@ public class CardScrollAdaptateur extends ArrayAdapter {
 
         Card card = cards.get(position);
 
-        TextView tv_sigle = (TextView) v.findViewById(R.id.list_cardName);
-        tv_sigle.setText(card.getNumber());
+        ImageView tv_typeImage = (ImageView) v.findViewById(R.id.list_icon);
+        tv_typeImage.setImageBitmap(card.getTypeImage());
+
+        TextView tv_cardName = (TextView) v.findViewById(R.id.list_cardName);
+        tv_cardName.setText(card.getTypeName());
 
       /*  TextView tv_categorie = (TextView) v.findViewById(R.id.module_tv_categorie);
         tv_categorie.setText(module.getCategorie());

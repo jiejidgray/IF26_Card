@@ -3,17 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/list_icon"
+        android:layout_width="75dp"
+        android:layout_height="45dp"
+         />
+
     <TextView
         android:id="@+id/list_cardName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="29dp"
         android:layout_weight="1"
         android:text="TextView" />
-    <TextView
-        android:id="@+id/list_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="test" />
 
 </LinearLayout>

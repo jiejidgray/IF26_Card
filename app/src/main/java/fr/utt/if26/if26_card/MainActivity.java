@@ -53,19 +53,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         //Bitmap photoS = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/sephora.png"));
-        Card cardSephora = new Card("66789985432",photoS, photoS,"Card Sephora comment !");
+        Card cardSephora = new Card("66789985432",photoS, photoS,"Card Sephora comment !","Sephora");
         Bitmap photoD=BitmapFactory.decodeResource(getResources(), R.drawable.darty);
 
         //Bitmap photoD = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/darty.jpg"));
-        Card cardDarty = new Card("96289266701",photoD,photoD,"Card Darty comment !");
+        Card cardDarty = new Card("96289266701",photoD,photoD,"Card Darty comment !","Darty");
 
         Bitmap photoC=BitmapFactory.decodeResource(getResources(), R.drawable.carrefour);
         //Bitmap photoC = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/carrefour.jpg"));
-        Card cardCarrefour = new Card("557845899854",photoC,photoC,"Card Carrefour comment !");
+        Card cardCarrefour = new Card("557845899854",photoC,photoC,"Card Carrefour comment !","Carrefour");
 
         Bitmap photoF=BitmapFactory.decodeResource(getResources(), R.drawable.fnac);
         //Bitmap photoF = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/fnac.png"));
-        Card cardFnac = new Card("7608765435",photoF,photoF,"Card Fnac comment !");
+        Card cardFnac = new Card("7608765435",photoF,photoF,"Card Fnac comment !","Fnac");
 
         cardlist.add(cardSephora);
         cardlist.add(cardDarty);

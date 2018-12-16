@@ -11,12 +11,16 @@ public class Card {
     private Bitmap Codephoto;
     private Bitmap Typephoto;
     private String Comment;
+    private String TypeName;
 
-    public Card(String Number, Bitmap Codephoto, Bitmap Typephoto, String Comment) {
+
+    public Card(String Number, Bitmap Codephoto, Bitmap Typephoto, String Comment, String TypenName) {
         this.Number = Number;
         this.Codephoto = Codephoto;
         this.Typephoto = Typephoto;
         this.Comment = Comment;
+        this.TypeName = TypenName;
+
 
     }
 
@@ -50,6 +54,13 @@ public class Card {
 
     public void setComment(String comment) {
         Comment = comment;
+    }
+    public String getTypeName() {
+        return TypeName;
+    }
+
+    public void setTypeName(String typeName) {
+        TypeName = typeName;
     }
 
    /* public Bitmap readImage(){
