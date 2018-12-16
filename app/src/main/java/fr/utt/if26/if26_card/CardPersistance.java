@@ -94,8 +94,11 @@ public class CardPersistance extends SQLiteOpenHelper implements PersistanceInte
 
     @Override
     public void initdata() {
+            Card testCard = new Card("2453467",null , null, "this is a test card");
 
-
+            testCard.setCodephoto(testCard.readImage());
+            testCard.setTypephoto(testCard.readImage());
+            this.addCard(testCard);
     }
 
 //还没做
@@ -160,5 +163,6 @@ public class CardPersistance extends SQLiteOpenHelper implements PersistanceInte
         }
         return listcard;
     }
+
 
 }
