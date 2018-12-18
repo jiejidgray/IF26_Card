@@ -16,6 +16,8 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
+import java.util.ArrayList;
+
 import static android.graphics.Color.BLACK;
 
 
@@ -23,17 +25,26 @@ public class CardActivity extends AppCompatActivity {
 
     private ImageView mResultImage;
     private TextView mResultText;
+    private TextView mResultTypeName;
+
+    private ArrayList<Card> cards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card);
-        Intent i =  getIntent();
 
+        CardPersistance persistance = new CardPersistance(this, "cards.db", null, 1);
+        persistance.initdata();
+        cards = persistance.getallCard();
+
+        Intent i =  getIntent();
         mResultImage = (ImageView) findViewById(R.id.code_img2);
         mResultText = (TextView) findViewById(R.id.result_text);
+        mResultTypeName = (TextView)findViewById(R.id.result_typeName);
 
         mResultText.setText(i.getStringExtra("content"));
+        mResultTypeName.setText(cards.get(i.getIntExtra("position",0)).getTypeName());
         Bitmap bitmap = (Bitmap) i.getParcelableExtra("bp");
         mResultImage.setImageBitmap(bitmap);
 

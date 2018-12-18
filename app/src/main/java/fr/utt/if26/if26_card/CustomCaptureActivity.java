@@ -69,7 +69,6 @@ public class CustomCaptureActivity extends AppCompatActivity {
         manualButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-
                 Intent intent = new Intent();
                 intent.setClass(CustomCaptureActivity.this, ManualActivity.class);
                 startActivity(intent);
