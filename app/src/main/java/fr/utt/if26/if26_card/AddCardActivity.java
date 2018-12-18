@@ -3,6 +3,7 @@ package fr.utt.if26.if26_card;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -28,9 +33,11 @@ public class AddCardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_card);
         bundle = new Bundle();
         Button scan = findViewById(R.id.add_card);
+
         scan.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+                AddCardActivity.bundle.putInt("position",100);
                 IntentIntegrator integrator = new IntentIntegrator(AddCardActivity.this);
                 integrator.setCaptureActivity(CustomCaptureActivity.class);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
@@ -38,7 +45,6 @@ public class AddCardActivity extends AppCompatActivity {
                 integrator.setBeepEnabled(false);
                 integrator.setOrientationLocked(false);
                 integrator.setPrompt("Scan");
-
                 integrator.initiateScan();
 
             }
@@ -88,22 +94,63 @@ public class AddCardActivity extends AppCompatActivity {
 
                 //二维码的实际内容
                 String content = result.getContents().toString();
-
+                String str =result.getContents().trim();
+                int size = str.length();
+                for (int i = 0; i < size; i++) {
+                    int c = str.charAt(i);
+                }
+                Bitmap bmp = null;
+                try {
+                    if (str != null && !"".equals(str)) {
+                        bmp = CreateOneDCode(str);
+                    }
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
+                if (bmp != null) {
+                    Intent intent = new Intent();
+                    intent.setClass(AddCardActivity.this, CardActivity.class);
+                    intent.putExtra("content",content);
+                    intent.putExtra("bp",bmp);
+                    //intent.putExtra("imgPath",imgPath);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
                 //如果你在调用扫码的时候setBarcodeImageEnabled(true)
                 //通过下面的方法获取截图的路径
-                String imgPath = result.getBarcodeImagePath();
+               // String imgPath = result.getBarcodeImagePath();
 
-                Intent i = new Intent();
-                Intent intent = new Intent();
-                intent.setClass(AddCardActivity.this, CardActivity.class);
-                intent.putExtra("content",content);
-                intent.putExtra("imgPath",imgPath);
-                intent.putExtras(bundle);
-                startActivity(intent);
+
             }
         } else {
             //Log.d(TAG, "Weird");
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    /**
+     *
+     * @param content content
+     * @return return barcode img
+     * @throws WriterException WriterException
+     */
+    public Bitmap CreateOneDCode(String content) throws WriterException {
+        BitMatrix matrix = new MultiFormatWriter().encode(content,
+                BarcodeFormat.CODE_128, 500, 200);
+        int width = matrix.getWidth();
+        int height = matrix.getHeight();
+        int[] pixels = new int[width * height];
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (matrix.get(x, y)) {
+                    pixels[y * width + x] = 0xff000000;
+                }
+            }
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(width, height,
+                Bitmap.Config.ARGB_8888);
+        bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
+        return bitmap;
     }
 }

@@ -44,7 +44,12 @@ public class CardActivity extends AppCompatActivity {
         mResultTypeName = (TextView)findViewById(R.id.result_typeName);
 
         mResultText.setText(i.getStringExtra("content"));
-        mResultTypeName.setText(cards.get(i.getIntExtra("position",0)).getTypeName());
+        if(i.getIntExtra("position",0) == 100){
+            mResultTypeName.setText("Other type card");
+        }else {
+            mResultTypeName.setText(cards.get(i.getIntExtra("position",0)).getTypeName());
+        }
+
         Bitmap bitmap = (Bitmap) i.getParcelableExtra("bp");
         mResultImage.setImageBitmap(bitmap);
 
