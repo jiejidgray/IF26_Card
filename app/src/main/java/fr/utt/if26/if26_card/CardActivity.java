@@ -5,7 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
@@ -21,20 +24,22 @@ import java.util.ArrayList;
 import static android.graphics.Color.BLACK;
 
 
-public class CardActivity extends AppCompatActivity {
+public class CardActivity extends AppCompatActivity{
 
     private ImageView mResultImage;
     private TextView mResultText;
     private TextView mResultTypeName;
+    private Button save;
+    private CardPersistance persistance;
 
     private ArrayList<Card> cards;
-
+    private Card newCard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card);
 
-        CardPersistance persistance = new CardPersistance(this, "cards.db", null, 1);
+         persistance = new CardPersistance(this, "cards.db", null, 1);
         persistance.initdata();
         cards = persistance.getallCard();
 
@@ -52,7 +57,45 @@ public class CardActivity extends AppCompatActivity {
 
         Bitmap bitmap = (Bitmap) i.getParcelableExtra("bp");
         mResultImage.setImageBitmap(bitmap);
+        String type = mResultTypeName.getText().toString();
 
+
+      /*  if( type == "Sephora") {
+            this.newCard.setNumber(this.mResultText.getText().toString());
+            this.newCard.setCodephoto(bitmap);
+            newCard.setTypephoto(photoS);
+            newCard.setTypeName(this.mResultTypeName.getText().toString());
+        }else if(type == "Darty"){
+            newCard = new Card(mResultText.getText().toString(),bitmap,photoD,null,mResultTypeName.getText().toString());
+        }else if(type == "Carrefour"){
+            newCard = new Card(mResultText.getText().toString(),bitmap,photoC,null,mResultTypeName.getText().toString());
+        }else if(type == "Fnac") {
+            newCard = new Card(mResultText.getText().toString(),bitmap,photoF,null,mResultTypeName.getText().toString());
+        }else{
+
+        }*/
+
+
+        save = findViewById(R.id.save);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i =  getIntent();
+                Bitmap bitmap = (Bitmap) i.getParcelableExtra("bp");
+                Bitmap photoS=BitmapFactory.decodeResource(getResources(), R.drawable.sephora);
+               // Bitmap photoD=BitmapFactory.decodeResource(getResources(), R.drawable.darty);
+               // Bitmap photoC=BitmapFactory.decodeResource(getResources(), R.drawable.carrefour);
+              //  Bitmap photoF=BitmapFactory.decodeResource(getResources(), R.drawable.fnac);
+                persistance = new CardPersistance(CardActivity.this, "cards.db", null, 1);
+                Card test = new Card(i.getStringExtra("content"),bitmap,photoS,null,"Sephora");
+                persistance.addCard(test);
+                CardList.getInstance().ajoute(test);
+                //Toast.makeText(CardActivity.this, "Add réussi", Toast.LENGTH_LONG).show();
+                i.putExtra("exit",true);
+                Intent intent = new Intent (CardActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -81,6 +124,12 @@ public class CardActivity extends AppCompatActivity {
         bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
         return bitmap;
     }
+
+
+
+
+
+
 
 
 }

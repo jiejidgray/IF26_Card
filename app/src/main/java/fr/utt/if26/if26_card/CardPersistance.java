@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -84,7 +85,8 @@ public class CardPersistance extends SQLiteOpenHelper implements PersistanceInte
     //sql指令不确定对不对。。。
     @Override
     public void addCard(Card card) {
-        SQLiteDatabase db = getReadableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
+
       //  ContentValues values = new ContentValues();
 
        /* if (db.isOpen()) {
@@ -94,6 +96,7 @@ public class CardPersistance extends SQLiteOpenHelper implements PersistanceInte
 
         db.close();
         }*/
+
        ContentValues values = new ContentValues();
         values.put(ATTRIBUT_NUMBER,card.getNumber());
        // byte[] stream =
@@ -102,7 +105,7 @@ public class CardPersistance extends SQLiteOpenHelper implements PersistanceInte
         values.put(ATTRIBUT_COMMENT,card.getComment());
         values.put(ATTRIBUT_TYPENAME,card.getTypeName());
 
-        db.insert(TABLE_CARD, null, values);
+        db.replace(TABLE_CARD, null, values);
         db.close();
 
     }

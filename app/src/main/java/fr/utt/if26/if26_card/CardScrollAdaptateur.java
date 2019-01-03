@@ -42,15 +42,6 @@ public class CardScrollAdaptateur extends ArrayAdapter {
 
 
 
-      /*  TextView tv_categorie = (TextView) v.findViewById(R.id.module_tv_categorie);
-        tv_categorie.setText(module.getCategorie());
-
-        TextView tv_parcours = (TextView) v.findViewById(R.id.module_tv_parcours);
-        tv_parcours.setText(module.getParcours());
-
-        TextView tv_credit = (TextView) v.findViewById(R.id.module_tv_credit);
-        tv_credit.setText(Integer.toString(module.getCredit()));*/
-
         return v;
 
     }

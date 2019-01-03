@@ -33,11 +33,11 @@ public class Card {
         return this.Codephoto;
     }
 
-    public String getNumber () {
+    public String getNumber() {
         return this.Number;
     }
 
-    public String getComment () {
+    public String getComment() {
         return this.Comment;
     }
 

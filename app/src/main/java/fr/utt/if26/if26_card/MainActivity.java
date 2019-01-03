@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.support.v4.app.*;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,15 +36,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView txt_setting;
     private FrameLayout content;
     private Button ajouter;
+    private Boolean tableExist = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
 
+
+        if(this.tableExist == false) {
+            CardPersistance persistance = new CardPersistance(this, "cards.db", null, 1);
+            this.tableExist = true;
+            persistance.onUpgrade(persistance.getReadableDatabase(),1,1);
+        }
+
         CardPersistance persistance = new CardPersistance(this, "cards.db", null, 1);
-        persistance.onUpgrade(persistance.getReadableDatabase(),1,1);
-        ArrayList<Card> cardlist = new ArrayList<Card>();
+        //CardPersistance persistance = new CardPersistance(this, "cards.db", null, 1);
+       // persistance.onUpgrade(persistance.getReadableDatabase(),1,1);
+        CardList cardList = CardList.getInstance();
+        ArrayList<Card> cardlist = cardList.getCardsArray();
+        //ArrayList<Card> cardlist = new ArrayList<Card>();
         // Resources res = this..getResources();
         //  Bitmap  photoS = BitmapFactory.decodeResource(getResources(), R.drawable.test);
         // Drawable Draw =  res.getDrawable(R.drawable.sephora, null);
@@ -76,7 +88,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Card c = (Card) (iterateur.next());
             persistance.addCard(c);
         }
-
+        ArrayList<Card> testCards =persistance.getallCard();
+        Log.d("testCard",testCards.toString());
 
         setContentView(R.layout.activity_main);
 

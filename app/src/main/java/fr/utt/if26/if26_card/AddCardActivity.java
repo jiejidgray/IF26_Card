@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 public class AddCardActivity extends AppCompatActivity {
         private ArrayList<Card> cards;
         private static Bundle bundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +81,15 @@ public class AddCardActivity extends AppCompatActivity {
             }
         });
 
-
+        ImageButton returnB = findViewById(R.id.returnB);
+        returnB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(AddCardActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
