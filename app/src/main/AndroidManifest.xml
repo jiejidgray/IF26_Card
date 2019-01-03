@@ -27,6 +27,7 @@
             android:theme="@style/AppThemeNoActionBar" />
         <activity android:name=".CardActivity" />
         <activity android:name=".ManualActivity" />
+        <activity android:name=".ShowCardActivity"></activity>
     </application>
 
 </manifest>

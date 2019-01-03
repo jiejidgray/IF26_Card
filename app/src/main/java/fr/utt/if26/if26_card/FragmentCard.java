@@ -3,12 +3,14 @@ package fr.utt.if26.if26_card;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -56,10 +58,19 @@ public class FragmentCard extends Fragment {
             }
         });*/
         gridview = (GridView) view.findViewById(R.id.liste_card_lv);
+
         CardPersistance persistance = new CardPersistance(this.getActivity(), "cards.db", null, 1);
         ArrayList<Card> listcard = persistance.getallCard();
         SetCardAdaptateur adapteur = new SetCardAdaptateur(this.getActivity(), R.layout.card_icon, listcard);
         gridview.setAdapter(adapteur);
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(),ShowCardActivity.class);
+                intent.putExtra("cardposition",i);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }

@@ -31,9 +31,10 @@ public class CardActivity extends AppCompatActivity{
     private TextView mResultTypeName;
     private Button save;
     private CardPersistance persistance;
-
+    public  Bitmap photo;
+    public String ctype;
     private ArrayList<Card> cards;
-    private Card newCard;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,21 +60,38 @@ public class CardActivity extends AppCompatActivity{
         mResultImage.setImageBitmap(bitmap);
         String type = mResultTypeName.getText().toString();
 
+        Log.i("type","1234"+type);
 
-      /*  if( type == "Sephora") {
-            this.newCard.setNumber(this.mResultText.getText().toString());
-            this.newCard.setCodephoto(bitmap);
-            newCard.setTypephoto(photoS);
-            newCard.setTypeName(this.mResultTypeName.getText().toString());
-        }else if(type == "Darty"){
-            newCard = new Card(mResultText.getText().toString(),bitmap,photoD,null,mResultTypeName.getText().toString());
-        }else if(type == "Carrefour"){
-            newCard = new Card(mResultText.getText().toString(),bitmap,photoC,null,mResultTypeName.getText().toString());
-        }else if(type == "Fnac") {
-            newCard = new Card(mResultText.getText().toString(),bitmap,photoF,null,mResultTypeName.getText().toString());
-        }else{
+        if( type.contains("Sephora")) {
+            Bitmap photoS=BitmapFactory.decodeResource(getResources(), R.drawable.sephora);
+            //this.newCard.setNumber(this.mResultText.getText().toString());
+           // i.putExtra("pho",photoS);
+            Log.i("type","123"+type);
+            photo=photoS;
+            ctype = type;
+           // this.newCard.setCodephoto(bitmap);
+           // newCard.setTypephoto(photoS);
+           // newCard.setTypeName(this.mResultTypeName.getText().toString());
+        }else if(type.contains("Darty")){
+             photo=BitmapFactory.decodeResource(getResources(), R.drawable.darty);
+            ctype = type;
 
-        }*/
+            // i.putExtra("pho",photoD);
+
+           // newCard = new Card(mResultText.getText().toString(),bitmap,photoD,null,mResultTypeName.getText().toString());
+        }else if(type.contains("Carrefour")){
+            photo=BitmapFactory.decodeResource(getResources(), R.drawable.carrefour);
+            ctype = type;
+
+            // i.putExtra("pho",photoC);
+            //newCard = new Card(mResultText.getText().toString(),bitmap,photoC,null,mResultTypeName.getText().toString());
+        }else if(type.contains("Fnac")) {
+               photo=BitmapFactory.decodeResource(getResources(), R.drawable.fnac);
+            ctype = type;
+
+            //i.putExtra("pho",photoF);
+            //newCard = new Card(mResultText.getText().toString(),bitmap,photoF,null,mResultTypeName.getText().toString());
+        }
 
 
         save = findViewById(R.id.save);
@@ -82,12 +100,10 @@ public class CardActivity extends AppCompatActivity{
             public void onClick(View view) {
                 Intent i =  getIntent();
                 Bitmap bitmap = (Bitmap) i.getParcelableExtra("bp");
-                Bitmap photoS=BitmapFactory.decodeResource(getResources(), R.drawable.sephora);
-               // Bitmap photoD=BitmapFactory.decodeResource(getResources(), R.drawable.darty);
-               // Bitmap photoC=BitmapFactory.decodeResource(getResources(), R.drawable.carrefour);
-              //  Bitmap photoF=BitmapFactory.decodeResource(getResources(), R.drawable.fnac);
+               // Bitmap photo = (Bitmap)i.getParcelableExtra("pho");
                 persistance = new CardPersistance(CardActivity.this, "cards.db", null, 1);
-                Card test = new Card(i.getStringExtra("content"),bitmap,photoS,null,"Sephora");
+                Card test = new Card(i.getStringExtra("content"),bitmap,photo,null,ctype);
+
                 persistance.addCard(test);
                 CardList.getInstance().ajoute(test);
                 //Toast.makeText(CardActivity.this, "Add réussi", Toast.LENGTH_LONG).show();
