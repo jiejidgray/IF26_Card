@@ -91,8 +91,9 @@ public class CardActivity extends AppCompatActivity{
                 persistance.addCard(test);
                 CardList.getInstance().ajoute(test);
                 //Toast.makeText(CardActivity.this, "Add réussi", Toast.LENGTH_LONG).show();
-                i.putExtra("exit",true);
                 Intent intent = new Intent (CardActivity.this, MainActivity.class);
+                intent.putExtra("exit",true);
+
                 startActivity(intent);
             }
         });

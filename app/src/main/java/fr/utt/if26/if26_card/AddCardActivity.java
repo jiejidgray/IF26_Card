@@ -55,7 +55,7 @@ public class AddCardActivity extends AppCompatActivity {
         final ListView maListe = findViewById(R.id.card_list_lv);
 
         CardPersistance persistance = new CardPersistance(this, "cards.db", null, 1);
-        persistance.initdata();
+       // persistance.initdata();
         this.cards = persistance.getallCard();
         final CardScrollAdaptateur adapteur = new CardScrollAdaptateur(this, R.layout.item_card, cards);
         maListe.setAdapter(adapteur);

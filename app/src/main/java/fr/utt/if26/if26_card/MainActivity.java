@@ -43,53 +43,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
 
+        Intent intent = getIntent();
+        this.tableExist = intent.getBooleanExtra("exit", false);
+        Log.i("myflag","12345"+this.tableExist);
 
-        if(this.tableExist == false) {
-            CardPersistance persistance = new CardPersistance(this, "cards.db", null, 1);
-            this.tableExist = true;
-            persistance.onUpgrade(persistance.getReadableDatabase(),1,1);
-        }
+        this.creatTable();
 
-        CardPersistance persistance = new CardPersistance(this, "cards.db", null, 1);
+      /*  CardPersistance persistance = new CardPersistance(this, "cards.db", null, 1);
         //CardPersistance persistance = new CardPersistance(this, "cards.db", null, 1);
        // persistance.onUpgrade(persistance.getReadableDatabase(),1,1);
-        CardList cardList = CardList.getInstance();
-        ArrayList<Card> cardlist = cardList.getCardsArray();
-        //ArrayList<Card> cardlist = new ArrayList<Card>();
-        // Resources res = this..getResources();
-        //  Bitmap  photoS = BitmapFactory.decodeResource(getResources(), R.drawable.test);
-        // Drawable Draw =  res.getDrawable(R.drawable.sephora, null);
 
-        Bitmap photoS=BitmapFactory.decodeResource(getResources(), R.drawable.sephora);
-
-
-
-        //Bitmap photoS = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/sephora.png"));
-        Card cardSephora = new Card("66789985432",photoS, photoS,"Card Sephora comment !","Sephora");
-        Bitmap photoD=BitmapFactory.decodeResource(getResources(), R.drawable.darty);
-
-        //Bitmap photoD = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/darty.jpg"));
-        Card cardDarty = new Card("96289266701",photoD,photoD,"Card Darty comment !","Darty");
-
-        Bitmap photoC=BitmapFactory.decodeResource(getResources(), R.drawable.carrefour);
-        //Bitmap photoC = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/carrefour.jpg"));
-        Card cardCarrefour = new Card("557845899854",photoC,photoC,"Card Carrefour comment !","Carrefour");
-
-        Bitmap photoF=BitmapFactory.decodeResource(getResources(), R.drawable.fnac);
-        //Bitmap photoF = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/fnac.png"));
-        Card cardFnac = new Card("7608765435",photoF,photoF,"Card Fnac comment !","Fnac");
-
-        cardlist.add(cardSephora);
-        cardlist.add(cardDarty);
-        cardlist.add(cardCarrefour);
-        cardlist.add(cardFnac);
-        Iterator iterateur = cardlist.iterator();
-        while (iterateur.hasNext()) {
-            Card c = (Card) (iterateur.next());
-            persistance.addCard(c);
-        }
         ArrayList<Card> testCards =persistance.getallCard();
-        Log.d("testCard",testCards.toString());
+        Log.d("testCard",testCards.toString());*/
 
         setContentView(R.layout.activity_main);
 
@@ -105,6 +70,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bindViews();
         txt_card.performClick();
 
+    }
+
+
+    private void creatTable() {
+        if(this.tableExist == false) {
+            CardPersistance persistance = new CardPersistance(this, "cards.db", null, 1);
+            this.tableExist = true;
+            persistance.onUpgrade(persistance.getReadableDatabase(),1,1);
+            CardList cardList = CardList.getInstance();
+            ArrayList<Card> cardlist = cardList.getCardsArray();
+            //ArrayList<Card> cardlist = new ArrayList<Card>();
+            // Resources res = this..getResources();
+            //  Bitmap  photoS = BitmapFactory.decodeResource(getResources(), R.drawable.test);
+            // Drawable Draw =  res.getDrawable(R.drawable.sephora, null);
+
+            Bitmap photoS=BitmapFactory.decodeResource(getResources(), R.drawable.sephora);
+
+
+
+            //Bitmap photoS = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/sephora.png"));
+            Card cardSephora = new Card("66789985432",photoS, photoS,"Card Sephora comment !","Sephora");
+            Bitmap photoD=BitmapFactory.decodeResource(getResources(), R.drawable.darty);
+
+            //Bitmap photoD = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/darty.jpg"));
+            Card cardDarty = new Card("96289266701",photoD,photoD,"Card Darty comment !","Darty");
+
+            Bitmap photoC=BitmapFactory.decodeResource(getResources(), R.drawable.carrefour);
+            //Bitmap photoC = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/carrefour.jpg"));
+            Card cardCarrefour = new Card("557845899854",photoC,photoC,"Card Carrefour comment !","Carrefour");
+
+            Bitmap photoF=BitmapFactory.decodeResource(getResources(), R.drawable.fnac);
+            //Bitmap photoF = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/fnac.png"));
+            Card cardFnac = new Card("7608765435",photoF,photoF,"Card Fnac comment !","Fnac");
+
+            cardlist.add(cardSephora);
+            cardlist.add(cardDarty);
+            cardlist.add(cardCarrefour);
+            cardlist.add(cardFnac);
+            Iterator iterateur = cardlist.iterator();
+            while (iterateur.hasNext()) {
+                Card c = (Card) (iterateur.next());
+                persistance.addCard(c);
+            }
+        }
     }
 //关联
     private void bindViews() {
