@@ -19,6 +19,7 @@ public class ShowCardActivity extends AppCompatActivity {
     private ImageView cardcode;
     private TextView cardNumber;
     private ImageButton backB;
+    private ImageView typecode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +32,12 @@ public class ShowCardActivity extends AppCompatActivity {
 
         this.cardcode = (ImageView)findViewById(R.id.card_code);
         this.cardNumber = findViewById(R.id.card_number);
+        this.typecode = findViewById(R.id.card_typephoto);
         Card thiscard = this.cardslist.get(this.cardPosition);
         this.cardNumber.setText(thiscard.getNumber());
 
         this.cardcode.setImageBitmap(thiscard.getCodeImage());
-
+        this.typecode.setImageBitmap(thiscard.getTypeImage());
         this.backB = findViewById(R.id.backB);
         this.backB.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
