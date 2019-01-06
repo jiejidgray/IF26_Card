@@ -16,9 +16,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class CardScrollAdaptateur extends ArrayAdapter {
-    ArrayList<Card> cards;
-    Context contexte;
-    int ressource;
+   private ArrayList<Card> cards;
+   private Context contexte;
+    private int ressource;
 
     public CardScrollAdaptateur(Context context, int resource, ArrayList<Card> data) {
         super(context, resource, data);

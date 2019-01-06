@@ -6,13 +6,10 @@ import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -20,8 +17,6 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
 import java.util.ArrayList;
-
-import static android.graphics.Color.BLACK;
 
 
 public class CardActivity extends AppCompatActivity{
@@ -60,7 +55,7 @@ public class CardActivity extends AppCompatActivity{
         mResultImage.setImageBitmap(bitmap);
         String type = mResultTypeName.getText().toString();
 
-        Log.i("type","1234"+type);
+       // Log.i("type","1234"+type);
 
         if( type.contains("Sephora")) {
             Bitmap photoS=BitmapFactory.decodeResource(getResources(), R.drawable.sephora);
@@ -91,6 +86,9 @@ public class CardActivity extends AppCompatActivity{
 
             //i.putExtra("pho",photoF);
             //newCard = new Card(mResultText.getText().toString(),bitmap,photoF,null,mResultTypeName.getText().toString());
+        }else if(type.contains("Other type card")){
+            photo =BitmapFactory.decodeResource(getResources(), R.drawable.other);
+            ctype = type;
         }
 
 
