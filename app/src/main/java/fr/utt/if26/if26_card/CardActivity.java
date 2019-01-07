@@ -1,8 +1,10 @@
 package fr.utt.if26.if26_card;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +31,7 @@ public class CardActivity extends AppCompatActivity{
     public  Bitmap photo;
     public String ctype;
     private ArrayList<Card> cards;
+    private ImageView returnadd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +112,14 @@ public class CardActivity extends AppCompatActivity{
                 intent.putExtra("exit",true);
 
                 startActivity(intent);
+            }
+        });
+        returnadd = findViewById(R.id.returnadd);
+        returnadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(CardActivity.this,AddCardActivity.class);
+                startActivity(in);
             }
         });
     }

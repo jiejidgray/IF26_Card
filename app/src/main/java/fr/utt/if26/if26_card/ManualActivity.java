@@ -6,9 +6,12 @@ import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +22,9 @@ import com.google.zxing.common.BitMatrix;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ManualActivity extends AppCompatActivity {
 
 
@@ -26,14 +32,39 @@ public class ManualActivity extends AppCompatActivity {
     private TextView cardNumberInput;
     // create barcode button
     private Button convertBarCode;
+    private Spinner spinner;
+    private ArrayAdapter <String> adapter;
+    private List<String> list;
+    private static Bundle bunle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual);
-
+        spinner = findViewById(R.id.spinner);
+        spinner.setPrompt("Choose your card type");
+        initDatas();
+        bunle = new Bundle();
+        adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
+        spinner.setAdapter(adapter);
         cardNumberInput = (TextView)findViewById(R.id.cardNum);
         convertBarCode = (Button)findViewById(R.id.bitmap);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 4){
+                    ManualActivity.bunle.putInt("position",100);
+                }else {
+                    ManualActivity.bunle.putInt("position",position);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                ManualActivity.bunle.putInt("position",100);
+            }
+        });
         setListener();
 
     }
@@ -65,7 +96,8 @@ public class ManualActivity extends AppCompatActivity {
                     Intent intent = new Intent();
                     intent.setClass(ManualActivity.this, CardActivity.class);
                     intent.putExtra("bp", bmp);
-                    intent.putExtra("content",cardNumberInput.getText());
+                    intent.putExtra("content",cardNumberInput.getText().toString());
+                    intent.putExtras(bunle);
                     startActivity(intent);
                 }
             }
@@ -73,7 +105,14 @@ public class ManualActivity extends AppCompatActivity {
 
 
     }
-
+    private void initDatas() {
+        list=new ArrayList<String>();
+        list.add("Sephora");
+        list.add("Darty");
+        list.add("Carrefour");
+        list.add("Fnac");
+        list.add("Other type card");
+    }
     /**
      *
      * @param content content

@@ -8,8 +8,8 @@
 
     <EditText
         android:id="@+id/cardNum"
-        android:layout_width="297dp"
-        android:layout_height="41dp"
+        android:layout_width="307dp"
+        android:layout_height="43dp"
         android:layout_marginBottom="308dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -19,10 +19,11 @@
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.563"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.866" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintVertical_bias="1.0" />
+
 
     <Button
         android:id="@+id/bitmap"
@@ -40,36 +41,34 @@
         app:layout_constraintTop_toBottomOf="@+id/cardNum"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="298dp"
-        android:layout_height="34dp"
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="236dp"
+        android:layout_height="41dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
-        android:text="Enter the customer number for your card"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="144dp"
+        android:gravity="left"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.574"
+        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.098" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/code_img"
-        android:layout_width="159dp"
-        android:layout_height="94dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="108dp"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="65dp"
+        android:layout_height="42dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        android:layout_marginTop="144dp"
+        android:gravity="center"
+        android:text="Type"
+        app:layout_constraintEnd_toStartOf="@+id/spinner"
+        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
