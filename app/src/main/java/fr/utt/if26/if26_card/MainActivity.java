@@ -19,6 +19,11 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -86,23 +91,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // Drawable Draw =  res.getDrawable(R.drawable.sephora, null);
 
             Bitmap photoS=BitmapFactory.decodeResource(getResources(), R.drawable.sephora);
-
+            Bitmap dataS = null;
+            try {
+                dataS = this.CreateOneCode("3301138477401");
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
 
 
             //Bitmap photoS = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/sephora.png"));
-            Card cardSephora = new Card("66789985432",photoS, photoS,"Card Sephora comment !","Sephora");
+            Card cardSephora = new Card("3301138477401",dataS, photoS,"Card Sephora comment !","Sephora");
             Bitmap photoD=BitmapFactory.decodeResource(getResources(), R.drawable.darty);
-
+            Bitmap dataD = null;
+            try {
+                dataD = this.CreateOneCode("3301432523997");
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
             //Bitmap photoD = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/darty.jpg"));
-            Card cardDarty = new Card("96289266701",photoD,photoD,"Card Darty comment !","Darty");
+            Card cardDarty = new Card("3301432523997",dataD,photoD,"Card Darty comment !","Darty");
+
 
             Bitmap photoC=BitmapFactory.decodeResource(getResources(), R.drawable.carrefour);
+            Bitmap dataC = null;
+            try {
+                dataC = this.CreateOneCode("3301902303045");
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
             //Bitmap photoC = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/carrefour.jpg"));
-            Card cardCarrefour = new Card("557845899854",photoC,photoC,"Card Carrefour comment !","Carrefour");
+            Card cardCarrefour = new Card("3301902303045",dataC,photoC,"Card Carrefour comment !","Carrefour");
 
             Bitmap photoF=BitmapFactory.decodeResource(getResources(), R.drawable.fnac);
+            Bitmap dataF = null;
+
+            try {
+                dataF = this.CreateOneCode("3327632053499");
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
+
+
             //Bitmap photoF = BitmapFactory.decodeStream(getClass().getResourceAsStream("/res/mipmap-xhdpi/fnac.png"));
-            Card cardFnac = new Card("7608765435",photoF,photoF,"Card Fnac comment !","Fnac");
+            Card cardFnac = new Card("3327632053499",dataF,photoF,"Card Fnac comment !","Fnac");
 
             cardlist.add(cardSephora);
             cardlist.add(cardDarty);
@@ -210,4 +241,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fTransaction.commit();
     }
 
+    public Bitmap CreateOneCode(String content) throws WriterException {
+        BitMatrix matrix = new MultiFormatWriter().encode(content,
+                BarcodeFormat.CODE_128, 500, 200);
+        int width = matrix.getWidth();
+        int height = matrix.getHeight();
+        int[] pixels = new int[width * height];
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (matrix.get(x, y)) {
+                    pixels[y * width + x] = 0xff000000;
+                }
+            }
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(width, height,
+                Bitmap.Config.ARGB_8888);
+        bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
+        return bitmap;
+    }
 }
